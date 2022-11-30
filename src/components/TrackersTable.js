@@ -7,9 +7,8 @@ const TrackersTable = ({trackers}) => {
     return `${duration.getMinutes()}:${duration.getSeconds()}`
   }
 
-  console.log(trackers)
   return (
-    <>
+    <div className="tableContainer">
       <h2>Liste des trackers</h2>
       <div>
         <table>
@@ -35,7 +34,7 @@ const TrackersTable = ({trackers}) => {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   )
 }
 
