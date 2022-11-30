@@ -1,6 +1,16 @@
 import * as React from 'react'
 import {groupBy} from '../helper'
 
+const TrackerCategory = ({category}) => {
+  return (
+    <tr>
+      <th className="th-category" colSpan="4">
+        {category}
+      </th>
+    </tr>
+  )
+}
+
 const TrackerRow = ({tracker}) => {
   const findDuration = (starttime, endtime) => {
     if (!starttime || !endtime) return
@@ -21,6 +31,19 @@ const TrackerRow = ({tracker}) => {
 }
 
 const TrackersTable = ({trackers}) => {
+  const rows = []
+  let lastCategory
+
+  const trackersParCategory = groupBy(trackers, 'category')
+
+  Object.keys(trackersParCategory).forEach(category => {
+    trackersParCategory[category].forEach(tracker => {
+      if (tracker.category !== lastCategory) {
+        rows.push(<TrackerRow key={tracker.id} tracker={tracker} />)
+        lastCategory = tracker.category
+      }
+    })
+  })
   return (
     <div className="TableContainer">
       <h2>Liste des trackers</h2>
@@ -35,8 +58,11 @@ const TrackersTable = ({trackers}) => {
             </tr>
           </thead>
           <tbody>
-            {trackers.map((tracker, {id}) => {
+            {/* {trackers.map((tracker, {id}) => {
               return <TrackerRow key={id} tracker={tracker} />
+            })} */}
+            {rows.map(row => {
+              return row
             })}
           </tbody>
         </table>
