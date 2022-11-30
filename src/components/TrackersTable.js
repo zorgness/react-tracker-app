@@ -1,6 +1,12 @@
 import * as React from 'react'
 
 const TrackersTable = ({trackers}) => {
+  const findDuration = (starttime, endtime) => {
+    if (!starttime || !endtime) return
+    const duration = new Date(new Date(endtime) - new Date(starttime))
+    return `${duration.getMinutes()}:${duration.getSeconds()}`
+  }
+
   console.log(trackers)
   return (
     <>
@@ -22,7 +28,7 @@ const TrackersTable = ({trackers}) => {
                   <td>{name}</td>
                   <td>{starttime}</td>
                   <td>{endtime}</td>
-                  <td>{endtime - starttime}</td>
+                  <td>{findDuration(starttime, endtime)}</td>
                 </tr>
               )
             })}
