@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {groupBy} from '../helper'
+import {groupBy, diffTime} from '../helper'
 
 const TrackerCategory = ({category}) => {
   return (
@@ -11,26 +11,27 @@ const TrackerCategory = ({category}) => {
   )
 }
 
-const TrackerRow = ({tracker}) => {
-  const findDuration = (starttime, endtime) => {
-    if (!starttime || !endtime) return
-    const duration = new Date(new Date(endtime) - new Date(starttime))
-    return `${duration.getMinutes()}:${duration.getSeconds()}`
+const TrackerRow = ({tracker, selectedTracker, onSelectedTracker}) => {
+  const handleClick = id => {
+    onSelectedTracker(id)
   }
 
-  const {name, starttime, endtime} = tracker
-
+  const {id, name, starttime, endtime} = tracker
+  const duration = diffTime(starttime, endtime)
   return (
-    <tr className="selectedline">
+    <tr
+      onClick={() => handleClick(id)}
+      className={id === selectedTracker && 'selectedline'}
+    >
       <td>{name}</td>
       <td>{starttime}</td>
       <td>{endtime}</td>
-      <td>{findDuration(starttime, endtime)}</td>
+      <td>{duration}</td>
     </tr>
   )
 }
 
-const TrackersTable = ({trackers}) => {
+const TrackersTable = ({trackers, selectedTracker, onSelectedTracker}) => {
   const rows = []
   let lastCategory
 
@@ -46,7 +47,15 @@ const TrackersTable = ({trackers}) => {
           />,
         )
       }
-      rows.push(<TrackerRow key={tracker.id} tracker={tracker} />)
+
+      rows.push(
+        <TrackerRow
+          key={tracker.id}
+          selectedTracker={selectedTracker}
+          onSelectedTracker={onSelectedTracker}
+          tracker={tracker}
+        />,
+      )
       lastCategory = tracker.category
     })
   })
@@ -63,14 +72,7 @@ const TrackersTable = ({trackers}) => {
               <th>Durée</th>
             </tr>
           </thead>
-          <tbody>
-            {/* {trackers.map((tracker, {id}) => {
-              return <TrackerRow key={id} tracker={tracker} />
-            })} */}
-            {rows.map(row => {
-              return row
-            })}
-          </tbody>
+          <tbody>{rows}</tbody>
         </table>
       </div>
     </div>

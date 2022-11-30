@@ -22,7 +22,11 @@ function TrackersApp() {
     <Fragment>
       <FilterTrackers onTextChange={handleTextChange} />
       <div>il y a {allTrackers.length} trackers</div>
-      <TrackersTable trackers={allTrackers} />
+      <TrackersTable
+        trackers={allTrackers}
+        selectedTracker={selectedTracker}
+        onSelectedTracker={setSelectedTracker}
+      />
     </Fragment>
   )
 }
