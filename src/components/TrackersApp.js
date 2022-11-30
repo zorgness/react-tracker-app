@@ -1,6 +1,24 @@
-// export * from './TrackersApp.final'
+import React, {useState} from 'react'
+import db from '../data'
 
-export * from './TrackersApp.exercise'
+function TrackersApp() {
+  const [allTrackers, setAllTrackers] = useState(db)
 
-// 🚀 Afficher le nom de tous les trackers
-// export * from './TrackersApp.bonus-1'
+  const [filterText, setFilterText] = useState('')
+
+  const [selectedTracker, setSelectedTracker] = useState({})
+
+  console.log(allTrackers)
+
+  return (
+    <div>
+      <h3>
+        il y a {allTrackers.length} tracker{allTrackers.length > 1 ? 's' : ''}
+      </h3>
+      {allTrackers.map(({id, name}) => {
+        return <p key={id}>{name}</p>
+      })}
+    </div>
+  )
+}
+export {TrackersApp}
