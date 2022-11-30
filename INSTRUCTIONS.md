@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Formulaire d'édition avancé
 ### 💡 Formulaire d'édition avancé
 =======
@@ -6,6 +7,11 @@
 
 ### 💡 Préparer le composant parent
 >>>>>>> exercises/01-composant-parent
+=======
+# Filtrer les Trackers
+
+### 💡 Filtrer les Trackers
+>>>>>>> exercises/02-filtrer-tracker
 
 ## 📝 Tes notes
 
@@ -14,6 +20,7 @@ Detaille ce que tu as appris ici
 
 ## Comprendre
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 La logique peut vite devenir complexe à gérer lorsque l'on a des états et des transitions. Exemple de Diagram de transition sur des boutons 
 =======
@@ -173,9 +180,30 @@ qui font appel au dispatch avec les bonne valeurs.
 📑 Le lien vers la doc de
 [Create React App](https://reactjs.org/docs/create-a-new-react-app.html)
 >>>>>>> exercises/01-composant-parent
+=======
+Nous avons un composant enfant `FilterTrackers` qui contiendra un champ input
+qui permettra de filtrer les trackers. Nous devons faire monter au composant
+parent `TrackersApp` la chaine de caractère.
+
+## Exercice
+
+Dans cet exercice tu vas devoir créer un composant `FilterTrackers` qui remontra
+la valeur saisie au parent `TrackersApp` . Il n'aura donc pas de state dans
+`FilterTrackers` . On utilisera le pattern `State Hoisting`. Dans `TrackersApp`
+tu vas devoir mettre à jour (filter) le state `allTrackers` en fonction de la
+valeur saisie
+
+Tu vas devoir modifier 2 composants : `FilterTrackers` et `TrackersApp`
+
+**Fichiers :**
+
+- `src/components/TrackersApp.js`
+- `src/components/FilterTrackers.js`
+>>>>>>> exercises/02-filtrer-tracker
 
 Utilise le ensuite de la manière suivante  dans le composant
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ```jsx
 const {
@@ -194,3 +222,7 @@ const {
 Remplir le formulaire le
 [formulaire de FeedBack.](https://go.mikecodeur.com/cours-react-avis?entry.1430994900=React%20Tracker%20App&entry.533578441=01-composant-parent)
 >>>>>>> exercises/01-composant-parent
+=======
+Remplir le formulaire le
+[formulaire de FeedBack.](https://go.mikecodeur.com/cours-react-avis?entry.1430994900=React%20Tracker%20App&entry.533578441=02-Filtrer%20les%20Trackers)
+>>>>>>> exercises/02-filtrer-tracker
