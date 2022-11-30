@@ -8,7 +8,7 @@ const TrackersTable = ({trackers}) => {
   }
 
   return (
-    <div className="tableContainer">
+    <div className="TableContainer">
       <h2>Liste des trackers</h2>
       <div>
         <table>
