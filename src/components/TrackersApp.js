@@ -2,6 +2,7 @@ import React, {Fragment} from 'react'
 import {FilterTrackers} from './FilterTrackers'
 import db from '../data'
 import {TrackersTable} from './TrackersTable'
+import {TrackerEditForm} from './TrackerEditForm'
 
 function TrackersApp() {
   const [allTrackers, setAllTrackers] = React.useState(db)
@@ -27,6 +28,7 @@ function TrackersApp() {
         selectedTracker={selectedTracker}
         onSelectedTracker={setSelectedTracker}
       />
+      <TrackerEditForm />
     </Fragment>
   )
 }
