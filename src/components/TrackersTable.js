@@ -23,7 +23,7 @@ const TrackersTable = ({trackers}) => {
           <tbody>
             {trackers.map(({id, name, starttime, endtime}) => {
               return (
-                <tr key={id}>
+                <tr key={id} className="selectedline">
                   <td>{name}</td>
                   <td>{starttime}</td>
                   <td>{endtime}</td>
