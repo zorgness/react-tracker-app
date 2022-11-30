@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react'
 import {FilterTrackers} from './FilterTrackers'
 import db from '../data'
+import {TrackersTable} from './TrackersTable'
 
 function TrackersApp() {
   const [allTrackers, setAllTrackers] = React.useState(db)
@@ -21,6 +22,7 @@ function TrackersApp() {
     <Fragment>
       <FilterTrackers onTextChange={handleTextChange} />
       <div>il y a {allTrackers.length} trackers</div>
+      <TrackersTable trackers={allTrackers} />
     </Fragment>
   )
 }
