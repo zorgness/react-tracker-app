@@ -39,9 +39,15 @@ const TrackersTable = ({trackers}) => {
   Object.keys(trackersParCategory).forEach(category => {
     trackersParCategory[category].forEach(tracker => {
       if (tracker.category !== lastCategory) {
-        rows.push(<TrackerRow key={tracker.id} tracker={tracker} />)
-        lastCategory = tracker.category
+        rows.push(
+          <TrackerCategory
+            key={tracker.category}
+            category={tracker.category}
+          />,
+        )
       }
+      rows.push(<TrackerRow key={tracker.id} tracker={tracker} />)
+      lastCategory = tracker.category
     })
   })
   return (
