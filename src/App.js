@@ -1,4 +1,5 @@
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import {TrackersApp} from './components/TrackersApp'
 
 function App() {

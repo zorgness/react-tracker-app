@@ -47,7 +47,6 @@ const TrackerEditForm = ({
 
   const handleDeleteTracker = e => {
     e.preventDefault()
-    console.log(tracker.id)
     onDeleteTracker(tracker.id)
   }
 
@@ -77,60 +76,83 @@ const TrackerEditForm = ({
   // met `disabled={disabled}` sur tous les champs <input< et <button> (sauf le boutton 'Nouveau Tracker')
   // console.log(tracker)
   return (
-    <>
-      {/* 🐶 defini 'handleOnSubmit' sur l'event 'onSubmit' du formulaire */}
+    <div className="container">
       <form className="Form" onSubmit={handleOnSubmit}>
         <fieldset>
           <legend>Gestion des Trackers</legend>
 
-          <label htmlFor="name">Name</label>
+          <label className="form-label" htmlFor="name">
+            Name
+          </label>
           <input
             type="text"
             name="trackers.name"
             placeholder="name"
             onChange={handleTrackerName}
+            className="form-control"
           />
-          <label htmlFor="start">Start date</label>
+          <label className="form-label" htmlFor="start">
+            Start date
+          </label>
           <input
             type="datetime-local"
             name="trackers.name"
             placeholder="start date"
             onChange={handleTrackerStartTime}
+            className="form-control"
           />
-          <label htmlFor="end">End date</label>
+          <label className="form-label" htmlFor="end">
+            End date
+          </label>
           <input
             type="datetime-local"
             name="trackers.name"
             placeholder="end date"
             onChange={handleTrackerEndTime}
+            className="form-control"
           />
-          <label htmlFor="category">Category</label>
-          <select
-            type="datetime-local"
-            name="trackers.name"
-            placeholder="end date"
-            onChange={handleTrackerCategory}
-          >
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+          <div class="input-group m-3 d-flex justify-content-center">
+            <div class="input-group-prepend">
+              <label className="input-group-text" htmlFor="category">
+                Category
+              </label>
+            </div>
 
-          <label>Actions</label>
-          <div className="Action">
-            <button onClick={handleNewTracker}>Nouveau Tracker</button>
+            <select
+              type="datetime-local"
+              name="trackers.name"
+              placeholder="end date"
+              onChange={handleTrackerCategory}
+              className="custom-select "
+            >
+              <option selected>Choose a category</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
 
-            <input type="submit" name="Ajouter" />
+          <label className="form-label mt-5">Actions</label>
+          <div className="Action d-flex justify-content-around mb-5 ">
+            <button onClick={handleNewTracker} className="btn btn-primary">
+              Nouveau Tracker
+            </button>
 
-            <button onClick={handleDeleteTracker}>Supprimer</button>
+            <input type="submit" name="Ajouter" className="btn btn-success" />
 
-            <button onClick={handleUpdateTracker}>Mettre à jour</button>
+            <button onClick={handleDeleteTracker} className="btn btn-danger">
+              Supprimer
+            </button>
+
+            <button onClick={handleUpdateTracker} className="btn btn-info">
+              Mettre à jour
+            </button>
           </div>
         </fieldset>
       </form>
-    </>
+    </div>
   )
 }
 
