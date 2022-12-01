@@ -69,7 +69,7 @@ const TrackerEditForm = ({
     <div className="container">
       <form className="Form" onSubmit={handleOnSubmit}>
         <fieldset>
-          <legend>Gestion des Trackers</legend>
+          <legend className="m-3">Gestion des Trackers</legend>
 
           <label className="form-label" htmlFor="name">
             Name
@@ -78,6 +78,7 @@ const TrackerEditForm = ({
             type="text"
             name="trackers.name"
             placeholder="name"
+            disabled={disabled}
             defaultValue={tracker.name}
             onChange={handleTrackerName}
             className="form-control"
@@ -89,6 +90,7 @@ const TrackerEditForm = ({
             type="datetime-local"
             name="trackers.name"
             placeholder="start date"
+            disabled={disabled}
             defaultValue={tracker.starttime}
             onChange={handleTrackerStartTime}
             className="form-control"
@@ -100,6 +102,7 @@ const TrackerEditForm = ({
             type="datetime-local"
             name="trackers.name"
             placeholder="end date"
+            disabled={disabled}
             defaultValue={tracker.endtime}
             onChange={handleTrackerEndTime}
             className="form-control"
@@ -115,6 +118,7 @@ const TrackerEditForm = ({
               type="datetime-local"
               name="trackers.name"
               placeholder="end date"
+              disabled={disabled}
               onChange={handleTrackerCategory}
               className="custom-select "
             >
@@ -131,9 +135,12 @@ const TrackerEditForm = ({
             </select>
           </div>
 
-          <label className="form-label mt-5">Actions</label>
-          <div className="Action d-flex justify-content-around mb-5 ">
-            <button onClick={handleNewTracker} className="btn btn-primary">
+          <legend className="m-3">Actions</legend>
+          <div className="Action d-flex justify-content-around mb-5 flex-wrap gap-3 ">
+            <button
+              onClick={handleNewTracker}
+              className="btn btn-outline-primary"
+            >
               Nouveau Tracker
             </button>
 
@@ -141,13 +148,13 @@ const TrackerEditForm = ({
               disabled={disabled}
               type="submit"
               name="Ajouter"
-              className="btn btn-success"
+              className="btn btn-outline-success"
             />
 
             <button
               disabled={disabled}
               onClick={handleDeleteTracker}
-              className="btn btn-danger"
+              className="btn btn-outline-danger"
             >
               Supprimer
             </button>
@@ -155,7 +162,7 @@ const TrackerEditForm = ({
             <button
               disabled={disabled}
               onClick={handleUpdateTracker}
-              className="btn btn-info"
+              className="btn btn-outline-info"
             >
               Mettre à jour
             </button>

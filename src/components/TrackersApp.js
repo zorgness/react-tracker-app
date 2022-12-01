@@ -38,7 +38,10 @@ function TrackersApp() {
   return (
     <Fragment>
       <FilterTrackers onTextChange={handleTextChange} />
-      <div>il y a {allTrackers.length} trackers</div>
+      <div>
+        {allTrackers.length} tracker
+        {allTrackers.length > 1 ? 's' : ''}
+      </div>
       <TrackersTable
         trackers={allTrackers}
         selectedTracker={selectedTracker}

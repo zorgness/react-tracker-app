@@ -7,8 +7,8 @@ const FilterTrackers = ({onTextChange}) => {
   }
 
   return (
-    <div>
-      <h2>Recherche de Trackers</h2>
+    <div className="mb-5">
+      <h2 className="m-5">Recherche de Trackers</h2>
       <div>
         <input
           type="text"

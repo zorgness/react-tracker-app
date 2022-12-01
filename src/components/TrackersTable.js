@@ -33,7 +33,6 @@ const TrackersTable = ({trackers, selectedTracker, onSelectedTracker}) => {
   })
   return (
     <div className="TableContainer">
-      <h2>Liste des trackers</h2>
       <div>
         <table>
           <thead>
