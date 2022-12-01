@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
 import {v4 as uuidv4} from 'uuid'
-import {getDateTimeForPicker} from '../helper'
+import {getDateTimeForPicker, groupBy} from '../helper'
 import db from './../data'
 
 const newTracker = () => ({
@@ -12,7 +12,7 @@ const newTracker = () => ({
   name: '',
 })
 
-const categories = db.map(({category}) => category)
+const categories = [...new Set(db.map(({category}) => category))]
 
 const TrackerEditForm = ({
   selectedTracker = {...newTracker, id: ''},
@@ -62,14 +62,6 @@ const TrackerEditForm = ({
 
   // conditionne la mise à jour du tracker si les ids sont differents et non vide
   // 🤖 selectedTracker?.id !== '' && selectedTracker?.id !== tracker.id
-
-  // 🐶 On veut maintenant activer / desactiver les boutons / Champs input en fonction
-  // de l'état du tracker (pas de tracker à editer / tracker à editer )
-  // on se base sur l'id
-  // 🤖 créée const disabled
-  // si id vide 'disabled' est à true, false sinon
-  // met `disabled={disabled}` sur tous les champs <input< et <button> (sauf le boutton 'Nouveau Tracker')
-  // console.log(tracker)
 
   const disabled = tracker.id === undefined
 
