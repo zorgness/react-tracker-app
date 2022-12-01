@@ -15,7 +15,7 @@ const newTracker = () => ({
 const categories = db.map(({category}) => category)
 
 const TrackerEditForm = ({
-  selectedTracker,
+  selectedTracker = {...newTracker, id: ''},
   onAddTracker,
   onDeleteTracker,
   onUpdatetracker,
@@ -88,6 +88,7 @@ const TrackerEditForm = ({
             type="text"
             name="trackers.name"
             placeholder="name"
+            defaultValue={tracker.name}
             onChange={handleTrackerName}
             className="form-control"
           />
@@ -98,6 +99,7 @@ const TrackerEditForm = ({
             type="datetime-local"
             name="trackers.name"
             placeholder="start date"
+            defaultValue={tracker.starttime}
             onChange={handleTrackerStartTime}
             className="form-control"
           />
@@ -108,11 +110,12 @@ const TrackerEditForm = ({
             type="datetime-local"
             name="trackers.name"
             placeholder="end date"
+            defaultValue={tracker.endtime}
             onChange={handleTrackerEndTime}
             className="form-control"
           />
-          <div class="input-group m-3 d-flex justify-content-center">
-            <div class="input-group-prepend">
+          <div className="input-group m-3 d-flex justify-content-center">
+            <div className="input-group-prepend">
               <label className="input-group-text" htmlFor="category">
                 Category
               </label>
@@ -125,9 +128,13 @@ const TrackerEditForm = ({
               onChange={handleTrackerCategory}
               className="custom-select "
             >
-              <option selected>Choose a category</option>
+              <option>Choose a category</option>
               {categories.map((category, index) => (
-                <option key={index} value={category}>
+                <option
+                  key={index}
+                  defaultValue=""
+                  selected={category === tracker.category ? category : null}
+                >
                   {category}
                 </option>
               ))}

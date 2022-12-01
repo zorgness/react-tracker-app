@@ -32,7 +32,7 @@ function TrackersApp() {
     const updatedArray = allTrackers.map(item =>
       item.id === tracker.id ? tracker : item,
     )
-    return updatedArray
+    setAllTrackers(updatedArray)
   }
 
   console.log(allTrackers.length)
