@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
 import {v4 as uuidv4} from 'uuid'
-import {getDateTimeForPicker, groupBy} from '../helper'
+import {getDateTimeForPicker} from '../helper'
 import db from './../data'
+import {reducer} from './reducers/reducer'
 
 const newTracker = () => ({
   id: uuidv4(),
@@ -20,24 +21,51 @@ const TrackerEditForm = ({
   onDeleteTracker,
   onUpdatetracker,
 }) => {
-  const [tracker, setTracker] = React.useState(selectedTracker)
+  const intialState = {
+    tracker: selectedTracker,
+    error: null,
+    status: 'idle',
+    disabledButtons: {btnSave: true, btnUp: true, btnDel: true},
+    disabledInput: true,
+  }
+
+  const [state, dispatch] = React.useReducer(reducer, intialState)
+
+  const {tracker, disabledButtons, disabledInput} = state
+
+  const {btnSave, btnUp, btnDel} = disabledButtons
 
   const handleTrackerName = e => {
-    setTracker({...tracker, name: e.target.value})
+    dispatch({
+      type: 'trackerChange',
+      payload: {...tracker, name: e.target.value},
+    })
   }
+
   const handleTrackerStartTime = e => {
-    setTracker({...tracker, starttime: e.target.value})
+    dispatch({
+      type: 'trackerChange',
+      payload: {...tracker, starttime: e.target.value},
+    })
   }
+
   const handleTrackerEndTime = e => {
-    setTracker({...tracker, endtime: e.target.value})
+    dispatch({
+      type: 'trackerChange',
+      payload: {...tracker, endtime: e.target.value},
+    })
   }
+
   const handleTrackerCategory = e => {
-    setTracker({...tracker, category: e.target.value})
+    dispatch({
+      type: 'trackerChange',
+      payload: {...tracker, category: e.target.value},
+    })
   }
 
   const handleOnSubmit = e => {
     e.preventDefault()
-    tracker.id = uuidv4()
+    console.log(tracker)
     onAddTracker(tracker)
   }
 
@@ -53,17 +81,16 @@ const TrackerEditForm = ({
 
   const handleNewTracker = e => {
     e.preventDefault()
-    setTracker(newTracker())
+    dispatch({type: 'new'})
   }
 
   React.useEffect(() => {
-    setTracker(selectedTracker)
+    if (selectedTracker?.id !== undefined) {
+      dispatch({type: 'edit', payload: selectedTracker})
+    }
   }, [selectedTracker])
 
-  // conditionne la mise à jour du tracker si les ids sont differents et non vide
-  // 🤖 selectedTracker?.id !== '' && selectedTracker?.id !== tracker.id
-
-  const disabled = tracker.id === undefined
+  const disabled = tracker?.id === undefined
 
   return (
     <div className="container">
@@ -76,10 +103,10 @@ const TrackerEditForm = ({
           </label>
           <input
             type="text"
-            name="trackers.name"
+            name="name"
             placeholder="name"
-            disabled={disabled}
-            defaultValue={tracker.name}
+            disabled={disabledInput}
+            defaultValue={tracker?.name}
             onChange={handleTrackerName}
             className="form-control"
           />
@@ -90,8 +117,8 @@ const TrackerEditForm = ({
             type="datetime-local"
             name="trackers.name"
             placeholder="start date"
-            disabled={disabled}
-            defaultValue={tracker.starttime}
+            disabled={disabledInput}
+            defaultValue={tracker?.starttime}
             onChange={handleTrackerStartTime}
             className="form-control"
           />
@@ -102,8 +129,8 @@ const TrackerEditForm = ({
             type="datetime-local"
             name="trackers.name"
             placeholder="end date"
-            disabled={disabled}
-            defaultValue={tracker.endtime}
+            disabled={disabledInput}
+            defaultValue={tracker?.endtime}
             onChange={handleTrackerEndTime}
             className="form-control"
           />
@@ -118,7 +145,7 @@ const TrackerEditForm = ({
               type="datetime-local"
               name="trackers.name"
               placeholder="end date"
-              disabled={disabled}
+              disabled={disabledInput}
               onChange={handleTrackerCategory}
               className="custom-select "
             >
@@ -127,7 +154,7 @@ const TrackerEditForm = ({
                 <option
                   key={index}
                   defaultValue=""
-                  selected={category === tracker.category ? category : null}
+                  selected={category === tracker?.category ? category : null}
                 >
                   {category}
                 </option>
@@ -145,14 +172,14 @@ const TrackerEditForm = ({
             </button>
 
             <input
-              disabled={disabled}
+              disabled={btnSave}
               type="submit"
               name="Ajouter"
               className="btn btn-outline-success"
             />
 
             <button
-              disabled={disabled}
+              disabled={btnDel}
               onClick={handleDeleteTracker}
               className="btn btn-outline-danger"
             >
@@ -160,7 +187,7 @@ const TrackerEditForm = ({
             </button>
 
             <button
-              disabled={disabled}
+              disabled={btnUp}
               onClick={handleUpdateTracker}
               className="btn btn-outline-info"
             >

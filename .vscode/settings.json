@@ -1,7 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.lineNumbers": "off",
+  "editor.lineNumbers": true,
   "[javascript]": {
     "editor.suggestSelection": "recentlyUsed",
     "editor.suggest.showKeywords": false

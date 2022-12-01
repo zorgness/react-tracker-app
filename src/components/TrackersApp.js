@@ -19,7 +19,6 @@ function TrackersApp() {
   }
 
   const handleAddTracker = tracker => {
-    console.log(tracker)
     setAllTrackers([...allTrackers, tracker])
   }
 

@@ -10,10 +10,10 @@ const TrackerRow = ({tracker, selectedTracker, onSelectedTracker}) => {
 
   const selected = tracker === selectedTracker ? 'selectedline' : ''
 
-  const startFormated = starttime.toLocaleString().split('T').join('  ')
+  const startFormated = starttime?.toLocaleString().split('T').join('  ')
 
   const endFormated = endtime
-    ? endtime.toLocaleString().split('T').join('  ')
+    ? endtime?.toLocaleString().split('T').join('  ')
     : '...en cours'
 
   const [duration, setDuration] = React.useState(diffTime(starttime, endtime))
