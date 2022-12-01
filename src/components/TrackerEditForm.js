@@ -65,23 +65,24 @@ const TrackerEditForm = ({
 
   const handleOnSubmit = e => {
     e.preventDefault()
-    console.log(tracker)
+
     onAddTracker(tracker)
+    dispatch({type: 'save'})
   }
 
-  const handleUpdateTracker = e => {
-    e.preventDefault()
+  const handleUpdateTracker = () => {
     onUpdatetracker(tracker)
+    dispatch({type: 'update'})
   }
 
-  const handleDeleteTracker = e => {
-    e.preventDefault()
+  const handleDeleteTracker = () => {
     onDeleteTracker(tracker.id)
+    dispatch({type: 'delete', payload: newTracker()})
   }
 
   const handleNewTracker = e => {
     e.preventDefault()
-    dispatch({type: 'new'})
+    dispatch({type: 'new', payload: newTracker()})
   }
 
   React.useEffect(() => {
@@ -89,8 +90,6 @@ const TrackerEditForm = ({
       dispatch({type: 'edit', payload: selectedTracker})
     }
   }, [selectedTracker])
-
-  const disabled = tracker?.id === undefined
 
   return (
     <div className="container">

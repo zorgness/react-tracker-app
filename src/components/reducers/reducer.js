@@ -2,6 +2,7 @@ export const reducer = (state, action) => {
   switch (action.type) {
     case 'new':
       return {
+        ...state,
         status: 'new',
         tracker: action.payload,
         disabledButtons: {btnSave: false, btnUp: true, btnDel: true},
@@ -13,7 +14,7 @@ export const reducer = (state, action) => {
         ...state,
         status: 'edition',
         tracker: action.payload,
-        disabledButtons: {btnSave: false, btnUp: false, btnDel: false},
+        disabledButtons: {btnSave: true, btnUp: false, btnDel: false},
         disabledInput: false,
         error: null,
       }
@@ -29,7 +30,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         status: 'update',
-        disabledButtons: {btnSave: false, btnUp: false, btnDel: false},
+        disabledButtons: {btnSave: true, btnUp: true, btnDel: false},
         disabledInput: false,
         error: null,
       }
