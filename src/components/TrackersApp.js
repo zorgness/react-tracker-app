@@ -9,7 +9,6 @@ function TrackersApp() {
   const [filterText, setFilterText] = React.useState('')
   const [selectedTracker, setSelectedTracker] = React.useState({})
 
-  // 🐶 fonction qui va recuperer le texte saisie et filtrer notre base de données
   const handleTextChange = text => {
     setFilterText(text)
     const filteredArray = db.filter(
@@ -18,6 +17,24 @@ function TrackersApp() {
 
     setAllTrackers(filteredArray)
   }
+
+  const handleAddTracker = tracker => {
+    console.log(tracker)
+    setAllTrackers([...allTrackers, tracker])
+  }
+
+  const handleDeleteTracker = id => {
+    return allTrackers.filter(tracker => tracker.id !== id)
+  }
+
+  const handleUpdateTracker = tracker => {
+    const updatedArray = allTrackers.map(item =>
+      item.id === tracker.id ? tracker : item,
+    )
+    return updatedArray
+  }
+
+  console.log(allTrackers.length)
 
   return (
     <Fragment>
@@ -28,7 +45,11 @@ function TrackersApp() {
         selectedTracker={selectedTracker}
         onSelectedTracker={setSelectedTracker}
       />
-      <TrackerEditForm />
+      <TrackerEditForm
+        onAddTracker={handleAddTracker}
+        onDeleteTracker={handleDeleteTracker}
+        onUpdatetracker={handleUpdateTracker}
+      />
     </Fragment>
   )
 }

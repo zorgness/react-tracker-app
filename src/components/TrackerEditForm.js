@@ -21,49 +21,45 @@ const TrackerEditForm = ({
   onUpdatetracker,
 }) => {
   const [tracker, setTracker] = React.useState(selectedTracker)
-  // 🐶 les 4 fonctions qui suivent sont appelé sur un changement de valeur dans le formulaire
-  // met à jour le state 'tracker' avec les nouvelle valeur du formulaire
+
   const handleTrackerName = e => {
-    setTracker({name: e.target.value})
+    setTracker({...tracker, name: e.target.value})
   }
   const handleTrackerStartTime = e => {
-    setTracker({starttime: e.target.value})
+    setTracker({...tracker, starttime: e.target.value})
   }
   const handleTrackerEndTime = e => {
-    setTracker({endtime: e.target.value})
+    setTracker({...tracker, endtime: e.target.value})
   }
   const handleTrackerCategory = e => {
-    setTracker({category: e.target.value})
+    setTracker({...tracker, category: e.target.value})
   }
-
-  // 🐶 créé une fonction 'handleOnSubmit' qui va appeler 'onAddTracker'
-  // ps : n'oublie pas le  e.preventDefault()
 
   const handleOnSubmit = e => {
     e.preventDefault()
-    onAddTracker()
+    onAddTracker(tracker)
   }
 
   const handleUpdateTracker = e => {
     e.preventDefault()
-    onUpdatetracker()
+    onUpdatetracker(tracker)
   }
 
   const handleDeleteTracker = e => {
     e.preventDefault()
-    onDeleteTracker()
+    onDeleteTracker(tracker.id)
   }
 
   const handleNewTracker = e => {
     e.preventDefault()
     setTracker(newTracker())
   }
-  // 🐶 créé une fonction 'handleUpdateTracker' qui va appeler 'onUpdateTracker'
 
-  // 🐶 créé une fonction 'handleDeleteTracker' qui va appeler 'onDeleteTracker'
-
-  // 🐶 créé une fonction 'handleNewTracker' qui va mettre à jour le state tracker
-  // avec newTracker()
+  // React.useEffect(() => {
+  //   return () => {
+  //     setTracker(selectedTracker)
+  //   }
+  // }, [selectedTracker])
 
   // 🐶 met à jour le state tracker quand 'selectedTracker' change de valeur.
   // ceci ce produit lors d'un clique sur le tableau par exemple, une nouvelle
@@ -78,7 +74,7 @@ const TrackerEditForm = ({
   // 🤖 créée const disabled
   // si id vide 'disabled' est à true, false sinon
   // met `disabled={disabled}` sur tous les champs <input< et <button> (sauf le boutton 'Nouveau Tracker')
-  console.log(tracker)
+  // console.log(tracker)
   return (
     <>
       {/* 🐶 defini 'handleOnSubmit' sur l'event 'onSubmit' du formulaire */}
