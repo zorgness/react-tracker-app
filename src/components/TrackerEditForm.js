@@ -15,7 +15,7 @@ const newTracker = () => ({
 const categories = db.map(({category}) => category)
 
 const TrackerEditForm = ({
-  selectedTracker = newTracker({id: ''}),
+  selectedTracker,
   onAddTracker,
   onDeleteTracker,
   onUpdatetracker,
@@ -47,6 +47,7 @@ const TrackerEditForm = ({
 
   const handleDeleteTracker = e => {
     e.preventDefault()
+    console.log(tracker.id)
     onDeleteTracker(tracker.id)
   }
 
@@ -55,11 +56,11 @@ const TrackerEditForm = ({
     setTracker(newTracker())
   }
 
-  // React.useEffect(() => {
-  //   return () => {
-  //     setTracker(selectedTracker)
-  //   }
-  // }, [selectedTracker])
+  console.log(tracker)
+
+  React.useEffect(() => {
+    setTracker(selectedTracker)
+  }, [selectedTracker])
 
   // 🐶 met à jour le state tracker quand 'selectedTracker' change de valeur.
   // ceci ce produit lors d'un clique sur le tableau par exemple, une nouvelle

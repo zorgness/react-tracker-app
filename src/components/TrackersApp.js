@@ -24,7 +24,8 @@ function TrackersApp() {
   }
 
   const handleDeleteTracker = id => {
-    return allTrackers.filter(tracker => tracker.id !== id)
+    const filteredArray = allTrackers.filter(tracker => tracker.id !== id)
+    setAllTrackers(filteredArray)
   }
 
   const handleUpdateTracker = tracker => {
@@ -46,6 +47,7 @@ function TrackersApp() {
         onSelectedTracker={setSelectedTracker}
       />
       <TrackerEditForm
+        selectedTracker={selectedTracker}
         onAddTracker={handleAddTracker}
         onDeleteTracker={handleDeleteTracker}
         onUpdatetracker={handleUpdateTracker}

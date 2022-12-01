@@ -2,13 +2,13 @@ import React from 'react'
 import {diffTime} from '../helper'
 
 const TrackerRow = ({tracker, selectedTracker, onSelectedTracker}) => {
-  const handleClick = id => {
-    onSelectedTracker(id)
+  const handleClick = tracker => {
+    onSelectedTracker(tracker)
   }
 
-  const {id, name, starttime, endtime} = tracker
+  const {name, starttime, endtime} = tracker
 
-  const selected = id === selectedTracker ? 'selectedline' : ''
+  const selected = tracker === selectedTracker ? 'selectedline' : ''
   const start = starttime.toLocaleString().split('T').join('  ')
   const end = endtime
     ? endtime.toLocaleString().split('T').join('  ')
@@ -31,7 +31,7 @@ const TrackerRow = ({tracker, selectedTracker, onSelectedTracker}) => {
   }, [starttime, endtime])
 
   return (
-    <tr onClick={() => handleClick(id)} className={selected}>
+    <tr onClick={() => handleClick(tracker)} className={selected}>
       <td>{name}</td>
       <td>{start}</td>
       <td>{end}</td>
