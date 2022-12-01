@@ -37,6 +37,7 @@ const TrackerEditForm = ({
 
   const handleOnSubmit = e => {
     e.preventDefault()
+    tracker.id = uuidv4()
     onAddTracker(tracker)
   }
 
@@ -55,16 +56,10 @@ const TrackerEditForm = ({
     setTracker(newTracker())
   }
 
-  console.log(tracker)
-
   React.useEffect(() => {
     setTracker(selectedTracker)
   }, [selectedTracker])
 
-  // 🐶 met à jour le state tracker quand 'selectedTracker' change de valeur.
-  // ceci ce produit lors d'un clique sur le tableau par exemple, une nouvelle
-  // valeur de 'selectedTracker' arrive et il faut mettre à jour le state.
-  // 🤖 utilise 'useEffect'
   // conditionne la mise à jour du tracker si les ids sont differents et non vide
   // 🤖 selectedTracker?.id !== '' && selectedTracker?.id !== tracker.id
 
@@ -75,6 +70,9 @@ const TrackerEditForm = ({
   // si id vide 'disabled' est à true, false sinon
   // met `disabled={disabled}` sur tous les champs <input< et <button> (sauf le boutton 'Nouveau Tracker')
   // console.log(tracker)
+
+  const disabled = tracker.id === undefined
+
   return (
     <div className="container">
       <form className="Form" onSubmit={handleOnSubmit}>
@@ -147,13 +145,26 @@ const TrackerEditForm = ({
               Nouveau Tracker
             </button>
 
-            <input type="submit" name="Ajouter" className="btn btn-success" />
+            <input
+              disabled={disabled}
+              type="submit"
+              name="Ajouter"
+              className="btn btn-success"
+            />
 
-            <button onClick={handleDeleteTracker} className="btn btn-danger">
+            <button
+              disabled={disabled}
+              onClick={handleDeleteTracker}
+              className="btn btn-danger"
+            >
               Supprimer
             </button>
 
-            <button onClick={handleUpdateTracker} className="btn btn-info">
+            <button
+              disabled={disabled}
+              onClick={handleUpdateTracker}
+              className="btn btn-info"
+            >
               Mettre à jour
             </button>
           </div>

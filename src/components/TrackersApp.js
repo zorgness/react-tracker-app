@@ -35,8 +35,6 @@ function TrackersApp() {
     setAllTrackers(updatedArray)
   }
 
-  console.log(allTrackers.length)
-
   return (
     <Fragment>
       <FilterTrackers onTextChange={handleTextChange} />
