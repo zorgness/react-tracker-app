@@ -41,6 +41,7 @@ const TrackerEditForm = ({
 
   const handleOnSubmit = e => {
     e.preventDefault()
+    onAddTracker()
   }
 
   const handleUpdateTracker = e => {
