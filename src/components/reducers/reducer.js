@@ -30,8 +30,8 @@ export const reducer = (state, action) => {
       return {
         ...state,
         status: 'update',
-        disabledButtons: {btnSave: true, btnUp: true, btnDel: false},
-        disabledInput: false,
+        disabledButtons: {btnSave: true, btnUp: true, btnDel: true},
+        disabledInput: true,
         error: null,
       }
     case 'delete':

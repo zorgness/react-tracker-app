@@ -3,9 +3,9 @@ import * as React from 'react'
 import {v4 as uuidv4} from 'uuid'
 import {getDateTimeForPicker} from '../helper'
 import db from './../data'
-import {reducer} from './reducers/reducer'
+import {useEditTracker} from './customHooks/useEditTracker'
 
-const newTracker = () => ({
+const newDefaultTracker = () => ({
   id: uuidv4(),
   category: 'Défault',
   starttime: getDateTimeForPicker(),
@@ -16,78 +16,68 @@ const newTracker = () => ({
 const categories = [...new Set(db.map(({category}) => category))]
 
 const TrackerEditForm = ({
-  selectedTracker = {...newTracker, id: ''},
+  selectedTracker = {...newDefaultTracker, id: ''},
   onAddTracker,
   onDeleteTracker,
   onUpdatetracker,
 }) => {
-  const intialState = {
-    tracker: selectedTracker,
-    error: null,
-    status: 'idle',
-    disabledButtons: {btnSave: true, btnUp: true, btnDel: true},
-    disabledInput: true,
-  }
-
-  const [state, dispatch] = React.useReducer(reducer, intialState)
-
-  const {tracker, disabledButtons, disabledInput} = state
+  const {
+    tracker,
+    error,
+    status,
+    disabledButtons,
+    disabledInput,
+    setTracker,
+    editTracker,
+    saveTracker,
+    updateTracker,
+    deleteTracker,
+    newTracker,
+  } = useEditTracker(selectedTracker)
 
   const {btnSave, btnUp, btnDel} = disabledButtons
 
   const handleTrackerName = e => {
-    dispatch({
-      type: 'trackerChange',
-      payload: {...tracker, name: e.target.value},
-    })
+    setTracker({...tracker, name: e.target.value})
   }
 
   const handleTrackerStartTime = e => {
-    dispatch({
-      type: 'trackerChange',
-      payload: {...tracker, starttime: e.target.value},
-    })
+    setTracker({...tracker, starttime: e.target.value})
   }
 
   const handleTrackerEndTime = e => {
-    dispatch({
-      type: 'trackerChange',
-      payload: {...tracker, endtime: e.target.value},
-    })
+    setTracker({...tracker, endtime: e.target.value})
   }
 
   const handleTrackerCategory = e => {
-    dispatch({
-      type: 'trackerChange',
-      payload: {...tracker, category: e.target.value},
-    })
+    setTracker({...tracker, category: e.target.value})
   }
 
   const handleOnSubmit = e => {
     e.preventDefault()
 
     onAddTracker(tracker)
-    dispatch({type: 'save'})
+    saveTracker()
   }
 
   const handleUpdateTracker = () => {
     onUpdatetracker(tracker)
-    dispatch({type: 'update'})
+    updateTracker()
   }
 
   const handleDeleteTracker = () => {
     onDeleteTracker(tracker.id)
-    dispatch({type: 'delete', payload: newTracker()})
+    deleteTracker(newDefaultTracker())
   }
 
   const handleNewTracker = e => {
     e.preventDefault()
-    dispatch({type: 'new', payload: newTracker()})
+    newTracker(newDefaultTracker())
   }
 
   React.useEffect(() => {
-    if (selectedTracker?.id !== undefined) {
-      dispatch({type: 'edit', payload: selectedTracker})
+    if (selectedTracker?.id !== '') {
+      editTracker(selectedTracker)
     }
   }, [selectedTracker])
 
